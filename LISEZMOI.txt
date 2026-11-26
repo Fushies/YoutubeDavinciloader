@@ -1,0 +1,93 @@
+YouTube pour Resolve
+====================
+
+Une fenêtre à côté de DaVinci Resolve (gratuit ou Studio) pour :
+  1. rechercher des vidéos YouTube (ou coller un lien),
+  2. les télécharger en vidéo MP4 1080p ou en audio (WAV ou MP3),
+  3. les glisser-déposer directement sur la timeline ou dans le Media Pool.
+
+Elle n'utilise pas l'API de scripting de Resolve (réservée à Studio) : tout passe par le
+glisser-déposer, comme depuis l'Explorateur Windows. Elle ne modifie pas Toolizo.
+
+
+Installation (Windows 10/11) — tout sur le disque D:
+----------------------------------------------------
+1. Décompresse le ZIP (n'importe où).
+2. Double-clique sur Installer.bat.
+3. Il propose D:\YouTubePourResolve : appuie sur Entrée (ou tape un autre dossier).
+4. C'est prêt :
+   - raccourci "YouTube pour Resolve" sur le Bureau,
+   - ou dans Resolve : Workspace > Scripts > YouTube_pour_Resolve (redémarre Resolve une fois).
+   Tu peux ensuite supprimer le dossier décompressé.
+
+Pas besoin d'installer Python : l'installeur télécharge un Python portable DANS le dossier
+choisi. Tout se trouve donc dans D:\YouTubePourResolve :
+
+   D:\YouTubePourResolve\
+     Telechargements\     <- tes vidéos et sons téléchargés
+     python\              <- Python portable + yt-dlp, ffmpeg, Deno, interface (~300 Mo)
+     app\                 <- l'application
+     cache\               <- miniatures et cache de yt-dlp / Deno
+     settings.json        <- tes réglages, favoris et recherches récentes
+     Lancer.bat, Mettre-a-jour.bat, Desinstaller.bat, LISEZMOI.txt
+
+Sur C: il n'y a que le raccourci du Bureau et un petit fichier de menu pour Resolve
+(%APPDATA%\Blackmagic Design\DaVinci Resolve\Support\Fusion\Scripts\Utility\YouTube_pour_Resolve.lua).
+Si une ancienne version est installée sur C:, l'installeur propose de la supprimer.
+
+
+Utilisation
+-----------
+Recherche YouTube
+- Tape ta recherche en haut (ex. "whoosh sound effect"), puis Entrée. Les résultats
+  continuent de se charger quand tu descends. Tri : pertinence, vues, durée.
+- ▶ au centre d'une vignette (ou double-clic) : APERÇU en bas de la fenêtre (vidéo 360p avec
+  le son, lecture/pause, position, volume). Barre d'espace = lecture/pause, Échap = fermer.
+- Bouton ⬇ rond (ou boutons de l'aperçu, ou clic droit) :
+    • Vidéo MP4 1080p : H.264 + son AAC. Si YouTube n'a que du VP9/AV1, conversion automatique
+      en H.264 (Resolve gratuit ne lit pas le VP9), avec la carte graphique si possible.
+    • Audio WAV (recommandé) : PCM 16 bits 48 kHz, le format le plus fiable dans Resolve.
+    • Audio MP3 : 320 kb/s, plus léger.
+- Plusieurs d'un coup : Ctrl/Maj + clic, puis le bouton vert "Télécharger".
+- Une fois "✓ Téléchargé", glisse la vignette sur ta timeline ou dans le Media Pool.
+
+MyInstants
+- Onglet "MyInstants" à gauche : les sons du site, avec la liste en haut à droite
+  (Tendances, Les meilleurs, Récents, Sound Effects, Memes, Réactions, TikTok…).
+  Pays des tendances : engrenage > MyInstants.
+- La barre de recherche cherche alors sur MyInstants (ex. "vine boom", "bruh").
+- ▶ sur le bouton coloré : écoute immédiate.
+- Glisse un son directement sur la timeline : il est téléchargé en WAV à la volée.
+  (Ou ⬇ pour choisir WAV ou MP3 d'origine.)
+
+Bibliothèque
+- "Téléchargements" : tous tes fichiers, filtrables Tout / Vidéos / Sons, triables, avec aperçu.
+  Étoile = favori. Sélection multiple puis glisser pour en mettre plusieurs d'un coup dans Resolve.
+- "Recherches récentes" : un clic relance la recherche (YouTube ou MyInstants).
+
+Vitesse
+- Le téléchargement rapide récupère la vidéo et le son en même temps, en morceaux, avec
+  8 connexions (réglable 4 à 16 dans l'engrenage), puis les assemble SANS ré-encodage :
+  la qualité est exactement celle de YouTube. En cas de souci, l'application repasse seule
+  en mode classique (le détail est noté dans cache\erreurs.log).
+
+
+Si ça ne marche plus
+--------------------
+- YouTube ne télécharge plus / la recherche ne donne rien : ⚙ Réglages > "Mettre à jour yt-dlp".
+  Ça prend 10 à 30 s, puis la fenêtre redémarre toute seule et reprend ta recherche.
+  Si c'est déjà à jour et que ça bloque encore, choisis le canal "Nightly" (corrections du jour)
+  puis remets à jour. La mise à jour automatique au démarrage est activée par défaut.
+  (Mettre-a-jour.bat dans le dossier d'installation fait la même chose sans ouvrir l'appli.)
+- "YouTube demande une vérification anti-robot" : ⚙ Réglages > choisis le navigateur où tu es
+  connecté à YouTube (Firefox conseillé ; avec Chrome/Edge, ferme-le complètement avant).
+- Détails d'une erreur : ⚙ Réglages > "Ouvrir le journal d'erreurs".
+- Pour mettre à jour l'application elle-même : relance Installer.bat d'une nouvelle version et
+  choisis le même dossier (tes téléchargements et réglages sont gardés).
+- Désinstaller : Desinstaller.bat dans le dossier d'installation (Telechargements est gardé).
+
+
+Droits
+------
+Ne télécharge que des contenus que tu as le droit d'utiliser : libres de droits, Creative Commons,
+ou avec l'accord de l'auteur. Les conditions d'utilisation de YouTube encadrent le téléchargement.

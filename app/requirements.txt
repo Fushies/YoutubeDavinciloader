@@ -1,0 +1,6 @@
+PySide6-Essentials>=6.6
+PySide6-Addons>=6.6
+yt-dlp[default]>=2026.10.26
+requests>=2.31
+imageio-ffmpeg>=0.5
+deno>=2.4
