@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+# Fichiers créés à l'installation / à l'utilisation
+python/
+cache/
+tmp/
+Telechargements/
+settings.json
+*.zip
